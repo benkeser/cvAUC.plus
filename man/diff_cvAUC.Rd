@@ -15,15 +15,14 @@ diff_cvAUC(fit1, fit2, confidence = 0.95)
 probability for the confidence interval.}
 }
 \value{
-An object of class \code{diff_cvAUC} with the following entries: \itemize{
-\item \code{diff} The difference in CV-AUC between the two fits.
-\item \code{ci} The confidence interval for the difference between the two fits. 
-\item \code{p} The two-sided p-value for the test that the two CV-AUCs are equal. 
-\item \code{folds} The number of folds used by \cote{fit1} and \code{fit2}.
-\item \code{learner1} The name of the learner used for \code{fit1}.
-\item \code{learner2} The name of the learner used for \code{fit2}.
-\item \code{confidence} The confidence interval level.  
-}
+An object of class \code{diff_cvAUC} with the following entries:
+\item{diff}{The difference in CV-AUC between the two fits.}
+\item{ci}{The confidence interval for the difference between the two fits. }
+\item{p}{The two-sided p-value for the test that the two CV-AUCs are equal. }
+\item{folds}{The number of folds used by \cote{fit1} and \code{fit2}.}
+\item{learner1}{The name of the learner used for \code{fit1}.}
+\item{learner2}{The name of the learner used for \code{fit2}.}
+\item{confidence}{The confidence interval level.}
 }
 \description{
 This function estimates the difference between two cross-validated AUCs

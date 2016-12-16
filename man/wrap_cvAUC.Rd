@@ -42,18 +42,17 @@ parallel. If \code{TRUE} then \code{foreach} is used to parallelize the fitting.
 \item{...}{Not currently used}
 }
 \value{
-An object of class \code{wrap_cvAUC} with the following entries: \itemize{
-\item \code{cvAUC} The estimated cross-validated AUC.
-\item \code{se} The standard error for the estimated CV-AUC. 
-\item \code{ci} A \code{100*confidence} percent confidence interval.
-\item \code{confidence} The level of confidence for the interval.
-\item \code{ic} The estimated influence function evaluated on the observations.
-\item \code{folds} The row indices for each validation sample. 
-\item \code{fitLibrary} The fit objects from \code{learner}.
-\item \code{learner} The learner that was used to generate predictions.
-\item \code{p} The one-sided p-value testing the null hypothesis that CV-AUC = 0.5 
-against the alternative that CV-AUC > 0.5. 
-}
+An object of class \code{wrap_cvAUC} with the following entries: 
+\item{cvAUC}{The estimated cross-validated AUC.}
+\item{se}{The standard error for the estimated CV-AUC.}
+\item{ci}{A \code{100*confidence} percent confidence interval.}
+\item{confidence}{The level of confidence for the interval.}
+\item{ic}{The estimated influence function evaluated on the observations.}
+\item{folds}{The row indices for each validation sample.}
+\item{fitLibrary}{The fit objects from \code{learner}.}
+\item{learner}{The learner that was used to generate predictions.}
+\item{p}{The one-sided p-value testing the null hypothesis that CV-AUC = 0.5 
+against the alternative that CV-AUC > 0.5. }
 }
 \description{
 This function is a helper wrapper function for the \code{cvAUC} function

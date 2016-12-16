@@ -32,18 +32,17 @@
 #' parallel. If \code{TRUE} then \code{foreach} is used to parallelize the fitting. 
 #' @param ... Not currently used
 #' 
-#' @return An object of class \code{wrap_cvAUC} with the following entries: \itemize{
-#' \item \code{cvAUC} The estimated cross-validated AUC.
-#' \item \code{se} The standard error for the estimated CV-AUC. 
-#' \item \code{ci} A \code{100*confidence} percent confidence interval.
-#' \item \code{confidence} The level of confidence for the interval.
-#' \item \code{ic} The estimated influence function evaluated on the observations.
-#' \item \code{folds} The row indices for each validation sample. 
-#' \item \code{fitLibrary} The fit objects from \code{learner}.
-#' \item \code{learner} The learner that was used to generate predictions.
-#' \item \code{p} The one-sided p-value testing the null hypothesis that CV-AUC = 0.5 
-#' against the alternative that CV-AUC > 0.5. 
-#' }
+#' @return An object of class \code{wrap_cvAUC} with the following entries: 
+#' \item{cvAUC}{The estimated cross-validated AUC.}
+#' \item{se}{The standard error for the estimated CV-AUC.}
+#' \item{ci}{A \code{100*confidence} percent confidence interval.}
+#' \item{confidence}{The level of confidence for the interval.}
+#' \item{ic}{The estimated influence function evaluated on the observations.}
+#' \item{folds}{The row indices for each validation sample.}
+#' \item{fitLibrary}{The fit objects from \code{learner}.}
+#' \item{learner}{The learner that was used to generate predictions.}
+#' \item{p}{The one-sided p-value testing the null hypothesis that CV-AUC = 0.5 
+#' against the alternative that CV-AUC > 0.5. }
 #' 
 #' @export
 #' 
@@ -99,15 +98,15 @@ wrap_cvAUC <- function(
 #' @param confidence A \code{numeric} between 0 and 1 indicating the nominal coverage
 #' probability for the confidence interval. 
 #' 
-#' @return An object of class \code{diff_cvAUC} with the following entries: \itemize{
-#' \item \code{diff} The difference in CV-AUC between the two fits.
-#' \item \code{ci} The confidence interval for the difference between the two fits. 
-#' \item \code{p} The two-sided p-value for the test that the two CV-AUCs are equal. 
-#' \item \code{folds} The number of folds used by \cote{fit1} and \code{fit2}.
-#' \item \code{learner1} The name of the learner used for \code{fit1}.
-#' \item \code{learner2} The name of the learner used for \code{fit2}.
-#' \item \code{confidence} The confidence interval level.  
-#' }
+#' @return An object of class \code{diff_cvAUC} with the following entries:
+#' \item{diff}{The difference in CV-AUC between the two fits.}
+#' \item{ci}{The confidence interval for the difference between the two fits. }
+#' \item{p}{The two-sided p-value for the test that the two CV-AUCs are equal. }
+#' \item{folds}{The number of folds used by \cote{fit1} and \code{fit2}.}
+#' \item{learner1}{The name of the learner used for \code{fit1}.}
+#' \item{learner2}{The name of the learner used for \code{fit2}.}
+#' \item{confidence}{The confidence interval level.}
+#' 
 #' @export
 
 diff_cvAUC <- function(fit1, fit2, confidence = 0.95){
