@@ -195,8 +195,8 @@ ci.cvAUC_withIC <- function(predictions, labels, label.ordering = NULL, folds = 
 
   # This is required to cleanly get past R CMD CHECK
   # https://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check
-  pred <- label <- NULL
-  fracNegLabelsWithSmallerPreds <- fracPosLabelsWithLargerPreds <- icVal <- NULL  
+  # pred <- label <- NULL
+  # fracNegLabelsWithSmallerPreds <- fracPosLabelsWithLargerPreds <- icVal <- NULL  
 
   .IC <- function(fold_preds, fold_labels, pos, neg, w1, w0) {
       n_rows <- length(fold_labels)
@@ -204,10 +204,10 @@ ci.cvAUC_withIC <- function(predictions, labels, label.ordering = NULL, folds = 
       n_neg <- n_rows - n_pos
       auc <- cvAUC:::AUC(fold_preds, fold_labels)
       DT <- data.table(pred = fold_preds, label = fold_labels)
-      DT <- DT[order(DT$pred, -xtfrm(DT$label)),]
+      DT <- DT[order(pred, -xtfrm(label)),]
       DT[, `:=`(fracNegLabelsWithSmallerPreds, cumsum(label == 
                                                         neg)/n_neg)]
-      DT <- DT[order(-DT$pred, DT$label),]
+      DT <- DT[order(-pred, label),]
       DT[, `:=`(fracPosLabelsWithLargerPreds, cumsum(label == 
                                                        pos)/n_pos)]
       DT[, `:=`(icVal, ifelse(label == pos, w1 * (fracNegLabelsWithSmallerPreds - 

@@ -19,16 +19,39 @@ This small package contains a few simple functions that enhance the [cvAUC](http
 The package can be installed directly from GitHub. 
 ```{r, message = FALSE}
 devtools::install_github("benkeser/cvAUC.plus")
+library(cvAUC.plus)
 ```
 
 ## Using wrap_cvAUC
 
-The first demonstration shows how to define a learner that can be used with `wrap_cvAUC`, which will compute the cross-validated AUC for that learner. The learner that is passed to `wrap_AUC` is a function of a specific form. If the user is familiar with the format of wrappers passed to the `SuperLearner` function in the package of the same name, then defining these wrappers should be fast and easy. A proper wrapper for `wrap_cvAUC` should be a function that takes as input `Y`, `X`, and `newX`. The function estimates a prediction function using `Y` and `X` and returns predictions on `newX`. The output of the function should be a list with two entries: `fit` the prediction model fit (can be `NULL` if you'd like)  and `pred` the predictions on `newX`. Here's a simple example from the documentation.
+The first demonstration shows how to define a learner that can be used with `wrap_cvAUC`, which will compute the cross-validated AUC for that learner. The learner that is passed to `wrap_AUC` is a function of a specific form. If the user is familiar with the format of wrappers passed to the `SuperLearner` function in the package of the same name, then defining these wrappers should be fast and easy. A proper wrapper for `wrap_cvAUC` should be a function that takes as input `Y`, `X`, and `newX`. The function estimates a prediction function using `Y` and `X` and returns predictions on `newX`. The output of the function should be a list with two entries: `fit` the prediction model fit (can be `NULL` if you'd like)  and `pred` the predictions on `newX`. Here are two simple examples.
 
 ```{r}
+# a simple main terms GLM
 myglm1 <- function(Y, X, newX){
     fm <- glm(Y~., data = X, family = binomial())
     pred <- predict(fm, newdata = newX, type = "response")
     return(list(fit = fm, pred = pred))
 }
+# a random forest
+myrandomforest <- function(Y, X, newX){
+    require(randomForest)
+    fm <- randomForest(x = X, y = Y, xtest = newX)
+    pred <- fm$test$votes[,2]
+    return(list(fit=fm, pred = pred))
+}
 ```
+
+Now we can use `wrap_cvAUC` to estimate the cross-validated AUC for these algorithms.
+```{r}
+# simulate data
+n <- 500
+X <- data.frame(x1 = rnorm(n), x2 = rnorm(n), x3 = rbinom(n,1,0.5))
+Y <- with(X, rbinom(n, 1, plogis(x1*x3 + x2^2/x1 + x3)))
+
+# get CV-AUC of main terms GLM
+wrap_cvAUC(Y = Y, X = X, learner = "myglm1")
+```
+
+
+
