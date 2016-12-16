@@ -108,7 +108,7 @@ wrap_cvAUC <- function(
 #' \item \code{learner2} The name of the learner used for \code{fit2}.
 #' \item \code{confidence} The confidence interval level.  
 #' }
-#'  
+#' @export
 
 diff_cvAUC <- function(fit1, fit2, confidence = 0.95){
   # check if folds are identical
@@ -236,7 +236,7 @@ ci.cvAUC_withIC <- function(predictions, labels, label.ordering = NULL, folds = 
 #' This function calls the specified \code{learner} over each fold and
 #' returns a list of cross-validated predictions and model fits. 
 #' 
- 
+
 .getPredictions <- function(learner, Y, X, V, folds, returnFits, parallel){
 
   .doFit <- function(x, tmpX, Y, folds, learner){
