@@ -49,7 +49,7 @@ auc_glm
 ```
 
     ## 10-fold CV-AUC for myglm      : 0.76
-    ## 95% confidence interval        : 0.72 , 0.80
+    ## 95% confidence interval        : 0.71 , 0.80
     ## One-sided p-value CV-AUC > 0.5 : < 0.01
 
 ``` r
@@ -59,7 +59,7 @@ auc_rf
 ```
 
     ## 10-fold CV-AUC for myrf      : 0.82
-    ## 95% confidence interval        : 0.78 , 0.85
+    ## 95% confidence interval        : 0.79 , 0.86
     ## One-sided p-value CV-AUC > 0.5 : < 0.01
 
 Using diff\_cvAUC
@@ -73,11 +73,37 @@ diff_auc <- diff_cvAUC(fit1 = auc_rf, fit2 = auc_glm)
 diff_auc
 ```
 
-    ## Diff 10-fold CV-AUC (myrf - myglm) : 0.05
-    ## 95% confidence interval               : -0.00 , 0.11
-    ## Two-sided p-value diff not 0          : = 0.06
+    ## Diff 10-fold CV-AUC (myrf - myglm) : 0.07
+    ## 95% confidence interval               : 0.02 , 0.12
+    ## Two-sided p-value diff not 0          : = 0.01
 
 Options for splitting
 ---------------------
 
 The `wrap_cvAUC` provides some functionality to control the sample splitting, based on the code developed in the `SuperLearner` package by Eric Polley. You can check the documentation for `SuperLearner.CV.control` to see all of this functionality, as internally this is the function that is called by `wrap_AUC`.
+
+Parallelization
+---------------
+
+The `wrap_cvAUC` function allows for parallelization via `foreach` if `parallel = TRUE`. This will parallelize the fitting of the `learner` algorithm over folds. The function will internally start (and stop) a cluster using `detectCores()` to determine how many cores to use.
+
+``` r
+# simulate data
+n <- 2000
+X <- data.frame(x1 = rnorm(n), x2 = rnorm(n), x3 = rbinom(n,1,0.5))
+Y <- with(X, rbinom(n, 1, plogis(x1*x3 + x2^2/x1 + x3)))
+
+# non-parallel
+system.time(tmp <- wrap_cvAUC(Y = Y, X = X, learner = "myrf", seed = 123))
+```
+
+    ##    user  system elapsed 
+    ##   2.375   0.029   2.477
+
+``` r
+# parallel
+system.time(tmp <- wrap_cvAUC(Y = Y, X = X, learner = "myrf", seed = 123, parallel = TRUE))
+```
+
+    ##    user  system elapsed 
+    ##   0.193   0.016   3.071
