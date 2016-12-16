@@ -107,6 +107,25 @@ wrap_cvAUC <- function(
 #' \item{learner2}{The name of the learner used for \code{fit2}.}
 #' \item{confidence}{The confidence interval level.}
 #' 
+#' @examples
+#' n <- 1000
+#' X <- data.frame(x1=rnorm(n),x2=rnorm(n))
+#' Y <- rbinom(n,1,plogis(X$x1 + X$x2))
+#' myglm1 <- function(Y,X,newX){
+#'    fm <- glm(Y~.,data=X,family=binomial())
+#'    pred <- predict(fm,newdata=newX,type="response")
+#'    return(list(fit = fm, pred = pred))
+#' }
+#' myglm2 <- function(Y,X,newX){
+#'   fm <- glm(Y~x1,data=X,family=binomial())
+#'   pred <- predict(fm,newdata=newX,type="response")
+#'   return(list(fit = fm, pred = pred))
+#' }
+#' out1 <- wrap_cvAUC(Y = Y, X=X, learner = "myglm1")
+#' out2 <- wrap_cvAUC(Y = Y, X=X, learner = "myglm2")
+#' 
+#' diff_auc <- diff_cvAUC(fit1 = out1, fit2 = out2)
+#' 
 #' @export
 
 diff_cvAUC <- function(fit1, fit2, confidence = 0.95){
