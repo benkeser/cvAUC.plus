@@ -1,0 +1,19 @@
+Package: cvAUC.plus
+Title: Estimates and Tests of Cross-validated Area Under the ROC Curve
+Version: 0.0.0.9000
+Authors@R: person("David", "Benkeser", email = "benkeser@berkeley.edu", role = c("aut", "cre"))
+Description: An add on to Erin LeDell's cvAUC package that has extra features
+    including more data splitting options and notably the ability to test the
+    difference between CV-AUC of two different learner fits.
+Depends:
+    R (>= 3.0.0),
+    knitr,
+    SuperLearner,
+    cvAUC,
+    doParallel,
+    foreach,
+    parallel
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
