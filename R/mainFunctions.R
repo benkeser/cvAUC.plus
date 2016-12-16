@@ -204,10 +204,10 @@ ci.cvAUC_withIC <- function(predictions, labels, label.ordering = NULL, folds = 
       n_neg <- n_rows - n_pos
       auc <- cvAUC:::AUC(fold_preds, fold_labels)
       DT <- data.table(pred = fold_preds, label = fold_labels)
-      DT <- DT[order(pred, -xtfrm(label)),]
+      DT <- DT[order(pred, -xtfrm(label))]
       DT[, `:=`(fracNegLabelsWithSmallerPreds, cumsum(label == 
                                                         neg)/n_neg)]
-      DT <- DT[order(-pred, label),]
+      DT <- DT[order(-pred, label)]
       DT[, `:=`(fracPosLabelsWithLargerPreds, cumsum(label == 
                                                        pos)/n_pos)]
       DT[, `:=`(icVal, ifelse(label == pos, w1 * (fracNegLabelsWithSmallerPreds - 
