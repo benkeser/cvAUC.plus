@@ -26,6 +26,7 @@ myglm <- function(Y, X, newX){
     return(list(fit = fm, pred = pred))
 }
 # a random forest
+library(randomForest)
 myrf <- function(Y, X, newX){
     require(randomForest)
     fm <- randomForest(x = X, y = factor(Y), xtest = newX)
@@ -47,27 +48,18 @@ auc_glm <- wrap_cvAUC(Y = Y, X = X, learner = "myglm", seed = 123)
 auc_glm
 ```
 
-    ## 10-fold CV-AUC for myglm      : 0.78
-    ## 95% confidence interval        : 0.74 , 0.82
+    ## 10-fold CV-AUC for myglm      : 0.76
+    ## 95% confidence interval        : 0.72 , 0.80
     ## One-sided p-value CV-AUC > 0.5 : < 0.01
 
 ``` r
 # get CV-AUC of main terms 
 auc_rf <- wrap_cvAUC(Y = Y, X = X, learner = "myrf", seed = 123)
-```
-
-    ## Loading required package: randomForest
-
-    ## randomForest 4.6-12
-
-    ## Type rfNews() to see new features/changes/bug fixes.
-
-``` r
 auc_rf
 ```
 
-    ## 10-fold CV-AUC for myrf      : 0.85
-    ## 95% confidence interval        : 0.82 , 0.89
+    ## 10-fold CV-AUC for myrf      : 0.82
+    ## 95% confidence interval        : 0.78 , 0.85
     ## One-sided p-value CV-AUC > 0.5 : < 0.01
 
 Using diff\_cvAUC
@@ -81,9 +73,9 @@ diff_auc <- diff_cvAUC(fit1 = auc_rf, fit2 = auc_glm)
 diff_auc
 ```
 
-    ## Diff 10-fold CV-AUC (myrf - myglm) : 0.07
-    ## 95% confidence interval               : 0.02 , 0.12
-    ## Two-sided p-value diff not 0          : < 0.01
+    ## Diff 10-fold CV-AUC (myrf - myglm) : 0.05
+    ## 95% confidence interval               : -0.00 , 0.11
+    ## Two-sided p-value diff not 0          : = 0.06
 
 Options for splitting
 ---------------------

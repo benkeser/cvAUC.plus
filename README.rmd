@@ -26,7 +26,7 @@ library(cvAUC.plus)
 
 The first demonstration shows how to define a learner that can be used with `wrap_cvAUC`, which will compute the cross-validated AUC for that learner. The learner that is passed to `wrap_AUC` is a function of a specific form. If the user is familiar with the format of wrappers passed to the `SuperLearner` function in the package of the same name, then defining these wrappers should be fast and easy. A proper wrapper for `wrap_cvAUC` should be a function that takes as input `Y`, `X`, and `newX`. The function estimates a prediction function using `Y` and `X` and returns predictions on `newX`. The output of the function should be a list with two entries: `fit` the prediction model fit (can be `NULL` if you'd like)  and `pred` the predictions on `newX`. Here are two simple examples.
 
-```{r}
+```{r, message=FALSE}
 # a simple main terms GLM
 myglm <- function(Y, X, newX){
     fm <- glm(Y~., data = X, family = binomial())
@@ -34,6 +34,7 @@ myglm <- function(Y, X, newX){
     return(list(fit = fm, pred = pred))
 }
 # a random forest
+library(randomForest)
 myrf <- function(Y, X, newX){
     require(randomForest)
     fm <- randomForest(x = X, y = factor(Y), xtest = newX)
