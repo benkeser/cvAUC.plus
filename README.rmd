@@ -1,0 +1,34 @@
+---
+title: "Estimation and testing of vaccine sieve effects using machine learning"
+author: "David Benkeser"
+date: "December 16, 2016"
+output:
+    md_document:
+        variant: markdown_github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# cvAUC.plus
+
+This small package contains a few simple functions that enhance the [cvAUC](https://github.com/ledell/cvAUC) package created by Erin LeDell. Notably, it allows for confidence intervals and hypothesis tests about differences between cross-validated AUC for two different prediction algorithms.
+
+## Installation of `cvAUC.plus`
+The package can be installed directly from GitHub. 
+```{r, message = FALSE}
+devtools::install_github("benkeser/cvAUC.plus")
+```
+
+## Using wrap_cvAUC
+
+The first demonstration shows how to define a learner that can be used with `wrap_cvAUC`, which will compute the cross-validated AUC for that learner. The learner that is passed to `wrap_AUC` is a function of a specific form. If the user is familiar with the format of wrappers passed to the `SuperLearner` function in the package of the same name, then defining these wrappers should be fast and easy. A proper wrapper for `wrap_cvAUC` should be a function that takes as input `Y`, `X`, and `newX`. The function estimates a prediction function using `Y` and `X` and returns predictions on `newX`. The output of the function should be a list with two entries: `fit` the prediction model fit (can be `NULL` if you'd like)  and `pred` the predictions on `newX`. Here's a simple example from the documentation.
+
+```{r}
+myglm1 <- function(Y, X, newX){
+    fm <- glm(Y~., data = X, family = binomial())
+    pred <- predict(fm, newdata = newX, type = "response")
+    return(list(fit = fm, pred = pred))
+}
+```

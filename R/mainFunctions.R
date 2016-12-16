@@ -71,7 +71,7 @@ wrap_cvAUC <- function(
     returnFits=FALSE, parallel = FALSE, ...
 ){
   N <- length(Y)
-  cvControl <- do.call("SuperLearner:::SuperLearner.CV.control",cvControl)
+  cvControl <- do.call("SuperLearner::SuperLearner.CV.control",cvControl)
   set.seed(seed)
   folds <- SuperLearner::CVFolds(N = N, id = id, Y = Y, cvControl = cvControl)
 
