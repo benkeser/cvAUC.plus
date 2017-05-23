@@ -14,4 +14,3 @@
 \description{
 A print method for objects of class \code{diff_cvAUC}
 }
-

@@ -50,4 +50,3 @@ out2 <- wrap_cvAUC(Y = Y, X=X, learner = "myglm2")
 diff_auc <- diff_cvAUC(fit1 = out1, fit2 = out2)
 
 }
-

@@ -12,4 +12,3 @@ This function is taken nearly verbatim from the \code{cvAUC} package. The only d
 is that it additionally returns estimated influence functions, which allows
 us to do later comparisons of CV-AUC between different learners.
 }
-

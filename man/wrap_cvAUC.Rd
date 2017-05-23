@@ -81,4 +81,3 @@ myglm2 <- function(Y,X,newX){
 out1 <- wrap_cvAUC(Y = Y, X=X, learner = "myglm1")
 out2 <- wrap_cvAUC(Y = Y, X=X, learner = "myglm2")
 }
-
