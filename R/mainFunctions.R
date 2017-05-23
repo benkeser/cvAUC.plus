@@ -29,7 +29,7 @@
 #' @param returnFits A \code{boolean} indicating whether or not to return the model fit objects
 #' for each fold.
 #' @param parallel A \code{boolean} indicating whether to perform the model fitting across folds in 
-#' parallel. If \code{TRUE} then \code{foreach} is used to parallelize the fitting. 
+#' parallel. If \code{TRUE} then \code{foreach} is used to parallelize the fitting.
 #' @param ... Not currently used
 #' 
 #' @return An object of class \code{wrap_cvAUC} with the following entries: 
@@ -81,7 +81,7 @@ wrap_cvAUC <- function(
 
   ciOut <- ci.cvAUC_withIC(prediction = pred, labels = Y, folds = folds, confidence = confidence)
   p <- pnorm(-abs((ciOut$cvAUC-0.5)/ciOut$se))
-  out <- c(ciOut, folds = list(folds), fitLibrary = fitList, learner = learner, confidence = confidence, p = p)
+  out <- c(ciOut, folds = list(folds), fitLibrary = list(fitList), learner = learner, confidence = confidence, p = p)
   class(out) <- "wrap_cvAUC"
   return(out)
 }
