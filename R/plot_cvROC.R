@@ -12,7 +12,7 @@
 #' @importFrom stats predict
 #' @importFrom ROCR prediction performance
 
-plot_cvROC <- function(Y, X, wrap_cvAUC_fit, plotAverage, ...){
+plot_cvROC <- function(Y, X, wrap_cvAUC_fit, plotAverage = TRUE, ...){
 	# Work flow
 	# ---------
 	# In each fold: 
@@ -28,5 +28,9 @@ plot_cvROC <- function(Y, X, wrap_cvAUC_fit, plotAverage, ...){
 
 	pred <- ROCR::prediction(pred_valid, labels_valid)
 	perf <- performance( pred, "tpr", "fpr")
-	plot(perf, avg="threshold", ...)
+	if(plotAverage){
+		plot(perf, avg="threshold", ...)
+	}else{
+		plot(perf, ...)
+	}
 }

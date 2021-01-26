@@ -4,7 +4,7 @@
 \alias{plot_cvROC}
 \title{plot_cvROC}
 \usage{
-plot_cvROC(Y, X, wrap_cvAUC_fit, plotAverage, ...)
+plot_cvROC(Y, X, wrap_cvAUC_fit, plotAverage = TRUE, ...)
 }
 \arguments{
 \item{Y}{A \code{numeric} vector of class labels}

@@ -4,8 +4,13 @@
 \alias{ci.cvAUC_withIC}
 \title{ci.cvAUC_withIC}
 \usage{
-ci.cvAUC_withIC(predictions, labels, label.ordering = NULL, folds = NULL,
-  confidence = 0.95)
+ci.cvAUC_withIC(
+  predictions,
+  labels,
+  label.ordering = NULL,
+  folds = NULL,
+  confidence = 0.95
+)
 }
 \description{
 This function is taken nearly verbatim from the \code{cvAUC} package. The only difference

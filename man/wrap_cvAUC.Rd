@@ -4,9 +4,18 @@
 \alias{wrap_cvAUC}
 \title{wrap_cvAUC}
 \usage{
-wrap_cvAUC(Y, X, learner, confidence = 0.95, seed = 1234, id = NULL,
-  cvControl = list(V = 10L, stratifyCV = FALSE, shuffle = TRUE, validRows =
-  NULL), returnFits = FALSE, parallel = FALSE, ...)
+wrap_cvAUC(
+  Y,
+  X,
+  learner,
+  confidence = 0.95,
+  seed = 1234,
+  id = NULL,
+  cvControl = list(V = 10L, stratifyCV = FALSE, shuffle = TRUE, validRows = NULL),
+  returnFits = FALSE,
+  parallel = FALSE,
+  ...
+)
 }
 \arguments{
 \item{Y}{A \code{numeric} vector of class labels}

@@ -102,7 +102,7 @@ wrap_cvAUC <- function(
 #' \item{diff}{The difference in CV-AUC between the two fits.}
 #' \item{ci}{The confidence interval for the difference between the two fits. }
 #' \item{p}{The two-sided p-value for the test that the two CV-AUCs are equal. }
-#' \item{folds}{The number of folds used by \cote{fit1} and \code{fit2}.}
+#' \item{folds}{The number of folds used by \code{fit1} and \code{fit2}.}
 #' \item{learner1}{The name of the learner used for \code{fit1}.}
 #' \item{learner2}{The name of the learner used for \code{fit2}.}
 #' \item{confidence}{The confidence interval level.}
